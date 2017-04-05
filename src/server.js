@@ -42,6 +42,7 @@ let sendSMS = (body, mediaUrl) => {
 	}
 	client.messages.create(msg, (err, message) => {
 	    console.log(err);
+		console.log(message);
 	})
 }
 // -------- END Twilio -------------
@@ -55,6 +56,7 @@ app.post('/caruso-concierge', (request, response) => {
 	let actionMap = new Map();
 	actionMap.set('input.unknown', (assistant) => {
 		sendSMS('Concierge Request: '+ request.body.result.resolvedQuery)
+		assistant.tell("OK")
 	})
 
 	assistant.handleRequest(actionMap);
