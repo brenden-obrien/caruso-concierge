@@ -3,8 +3,6 @@
 const FROM_PHONE = process.env.FROM_PHONE || '+13232838412'
 const TO_PHONE = process.env.TO_PHONE || '+13472325208'
 const PORT = process.env.PORT || 8080
-const ADMIN_USER = process.env.ADMIN_USER || 'admin'
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD
 
 // from https://www.twilio.com/console
 const TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID || 'AC639f15cbddff570d6a04e7e3b7eb86bf'
@@ -14,16 +12,10 @@ const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN
 let ApiAiAssistant = require('actions-on-google').ApiAiAssistant
 let express = require('express')
 let bodyParser = require('body-parser')
-let basicAuth = require('express-basic-auth')
 
 let app = express()
 app.set('port', PORT)
 app.use(bodyParser.json({type: 'application/json'}))
-if (ADMIN_PASSWORD) {
-	app.use(basicAuth({
-	    users: { ADMIN_USER: ADMIN_PASSWORD }
-	}))
-}
 
 // -------- START Twilio -------------
 let TwilioFactory = () => {
