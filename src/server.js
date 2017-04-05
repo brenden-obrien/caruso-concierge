@@ -51,11 +51,10 @@ let sendSMS = (body, mediaUrl) => {
 app.post('/caruso-concierge', (request, response) => {
 	const assistant = new ApiAiAssistant({request: request, response: response})
 	console.log(assistant.getIntent())
-	console.log(request.body)
 
 	let actionMap = new Map();
 	actionMap.set('input.unknown', (assistant) => {
-		sendSMS('Concierge Request: ')
+		sendSMS('Concierge Request: '+ request.body.result.resolvedQuery)
 	})
 
 	assistant.handleRequest(actionMap);
