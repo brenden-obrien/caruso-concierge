@@ -42,7 +42,6 @@ let sendSMS = (body, mediaUrl) => {
 	}
 	client.messages.create(msg, (err, message) => {
 	    console.log(err);
-		console.log(message);
 	})
 }
 // -------- END Twilio -------------
@@ -52,12 +51,23 @@ let sendSMS = (body, mediaUrl) => {
 app.post('/caruso-concierge', (request, response) => {
 	const assistant = new ApiAiAssistant({request: request, response: response})
 	console.log(assistant.getIntent())
+
+
 	console.log(request.body.result.fulfillment)
 
 	let actionMap = new Map();
 	actionMap.set('input.unknown', (assistant) => {
+		let speech = "OK"
+		if (request.body &&
+			request.body.result &&
+			request.body.result.fulfillment &&
+			request.body.result.fulfillment.messages &&
+			request.body.result.fulfillment.messages[0] &&
+			request.body.result.fulfillment.messages[0].speech) {
+				speech = request.body.result.fulfillment.messages[0].speech
+			}
 		sendSMS('Concierge Request: '+ request.body.result.resolvedQuery)
-		assistant.tell("OK")
+		assistant.tell(speech)
 	})
 
 	assistant.handleRequest(actionMap);
