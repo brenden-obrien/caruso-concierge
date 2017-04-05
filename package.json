@@ -1,0 +1,40 @@
+{
+  "name": "caruso-concierge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel-node src/server.js"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "actions-on-google": "^1.0.4",
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-transform-object-rest-spread": "^6.20.2",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "body-parser": "^1.16.1",
+    "express": "^4.14.0",
+    "socket.io": "^1.7.2",
+    "square-connect": "0.0.2",
+    "twilio": "^2.11.1"
+  },
+  "devDependencies": {
+    "babel-loader": "^6.2.10",
+    "material-ui": "^0.16.6",
+    "node-sass": "^4.3.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.2",
+    "react-tap-event-plugin": "^2.0.1",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0",
+    "sass-loader": "^4.1.1",
+    "socket.io-client": "^1.7.2",
+    "webpack": "^1.14.0"
+  }
+}
