@@ -24,8 +24,6 @@ if (ADMIN_PASSWORD) {
 	    users: { ADMIN_USER: ADMIN_PASSWORD }
 	}))
 }
-app.use(express.static('public'))
-
 
 // -------- START Twilio -------------
 let TwilioFactory = () => {
@@ -72,6 +70,9 @@ app.post('/caruso-concierge', (request, response) => {
 	assistant.handleRequest(actionMap);
 });
 // -------- END API.AI -------------
+
+
+app.use(express.static('public'))
 
 // Start the server
 let server = app.listen(app.get('port'), function () {
