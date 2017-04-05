@@ -19,6 +19,7 @@
     "babel-preset-react": "^6.16.0",
     "body-parser": "^1.16.1",
     "express": "^4.14.0",
+    "express-basic-auth": "^1.0.1",
     "socket.io": "^1.7.2",
     "square-connect": "0.0.2",
     "twilio": "^2.11.1"
