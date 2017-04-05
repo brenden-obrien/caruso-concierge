@@ -12,20 +12,22 @@ const TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN
 
 // Boilerplate setup
 let ApiAiAssistant = require('actions-on-google').ApiAiAssistant
-let Express = require('express')
-let BodyParser = require('body-parser')
-let ExpressBasicAuth = require('express-basic-auth')
+let express = require('express')
+let bodyParser = require('body-parser')
+let basicAuth = require('express-basic-auth')
 
-let app = Express()
+let app = express()
 app.set('port', PORT)
-app.use(BodyParser.json({type: 'application/json'}))
+app.use(bodyParser.json({type: 'application/json'}))
 if (ADMIN_PASSWORD) {
-	app.use(ExpressBasicAuth({
+	app.use(basicAuth({
 	    users: { ADMIN_USER: ADMIN_PASSWORD }
 	}))
 }
+app.use(express.static('public'))
 
 
+// -------- START Twilio -------------
 let TwilioFactory = () => {
 	var twilio = require('twilio')
 	if (TWILIO_AUTH_TOKEN == null) {
@@ -52,8 +54,10 @@ let sendSMS = (body, mediaUrl) => {
 	    console.log(err);
 	})
 }
+// -------- END Twilio -------------
 
-// Create an instance of ApiAiAssistant
+
+// -------- START API.AI -------------
 app.post('/caruso-concierge', (request, response) => {
 	const assistant = new ApiAiAssistant({request: request, response: response})
 	console.log(request)
@@ -67,8 +71,7 @@ app.post('/caruso-concierge', (request, response) => {
 
 	assistant.handleRequest(actionMap);
 });
-
-app.use(express.static('public'))
+// -------- END API.AI -------------
 
 // Start the server
 let server = app.listen(app.get('port'), function () {
